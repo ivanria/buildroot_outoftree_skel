@@ -1,0 +1,19 @@
+diff -Naur qemu-8.1.1-orig/linux-user/syscall.c qemu-8.1.1/linux-user/syscall.c
+--- qemu-8.1.1-orig/linux-user/syscall.c	2023-09-21 23:20:52.000000000 +0300
++++ qemu-8.1.1/linux-user/syscall.c	2026-07-01 21:08:17.097812058 +0300
+@@ -359,6 +359,7 @@
+ _syscall3(int, sys_sched_setaffinity, pid_t, pid, unsigned int, len,
+           unsigned long *, user_mask_ptr);
+ /* sched_attr is not defined in glibc */
++#ifndef SCHED_ATTR_SIZE_VER0
+ struct sched_attr {
+     uint32_t size;
+     uint32_t sched_policy;
+@@ -371,6 +372,7 @@
+     uint32_t sched_util_min;
+     uint32_t sched_util_max;
+ };
++#endif
+ #define __NR_sys_sched_getattr __NR_sched_getattr
+ _syscall4(int, sys_sched_getattr, pid_t, pid, struct sched_attr *, attr,
+           unsigned int, size, unsigned int, flags);

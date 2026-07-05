@@ -1,0 +1,34 @@
+diff -Naur squashfs-3de1687d7432ea9b302c2db9521996f506c140a3-orig/squashfs-tools/mksquashfs.c squashfs-3de1687d7432ea9b302c2db9521996f506c140a3/squashfs-tools/mksquashfs.c
+--- squashfs-3de1687d7432ea9b302c2db9521996f506c140a3-orig/squashfs-tools/mksquashfs.c	2015-12-07 04:42:03.000000000 +0300
++++ squashfs-3de1687d7432ea9b302c2db9521996f506c140a3/squashfs-tools/mksquashfs.c	2026-06-29 14:17:47.654349835 +0300
+@@ -50,6 +50,7 @@
+ #include <sys/wait.h>
+ #include <limits.h>
+ #include <ctype.h>
++#include <sys/sysmacros.h>
+ 
+ #ifndef linux
+ #define __BYTE_ORDER BYTE_ORDER
+diff -Naur squashfs-3de1687d7432ea9b302c2db9521996f506c140a3-orig/squashfs-tools/mksquashfs.h squashfs-3de1687d7432ea9b302c2db9521996f506c140a3/squashfs-tools/mksquashfs.h
+--- squashfs-3de1687d7432ea9b302c2db9521996f506c140a3-orig/squashfs-tools/mksquashfs.h	2015-12-07 04:42:03.000000000 +0300
++++ squashfs-3de1687d7432ea9b302c2db9521996f506c140a3/squashfs-tools/mksquashfs.h	2026-06-29 14:05:36.452934526 +0300
+@@ -133,7 +133,7 @@
+ #define BLOCK_OFFSET 2
+ 
+ extern struct cache *reader_buffer, *fragment_buffer, *reserve_cache;
+-struct cache *bwriter_buffer, *fwriter_buffer;
++extern struct cache *bwriter_buffer, *fwriter_buffer;
+ extern struct queue *to_reader, *to_deflate, *to_writer, *from_writer,
+ 	*to_frag, *locked_fragment, *to_process_frag;
+ extern struct append_file **file_mapping;
+diff -Naur squashfs-3de1687d7432ea9b302c2db9521996f506c140a3-orig/squashfs-tools/unsquashfs.c squashfs-3de1687d7432ea9b302c2db9521996f506c140a3/squashfs-tools/unsquashfs.c
+--- squashfs-3de1687d7432ea9b302c2db9521996f506c140a3-orig/squashfs-tools/unsquashfs.c	2015-12-07 04:42:03.000000000 +0300
++++ squashfs-3de1687d7432ea9b302c2db9521996f506c140a3/squashfs-tools/unsquashfs.c	2026-06-29 14:05:15.773122707 +0300
+@@ -37,6 +37,7 @@
+ #include <sys/resource.h>
+ #include <limits.h>
+ #include <ctype.h>
++#include <sys/sysmacros.h>
+ 
+ struct cache *fragment_cache, *data_cache;
+ struct queue *to_reader, *to_inflate, *to_writer, *from_writer;
